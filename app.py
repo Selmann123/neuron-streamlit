@@ -102,5 +102,4 @@ if st.button("Canlı çalıştır"):
         ax.set_xlabel("Time (ms)")
         ax.set_ylabel("mV")
         ax.set_title("Canlı Tek Nöron")
-        placeholder.pyplot(fig)
-        time.sleep(speed / 1000)
+        placeholder
