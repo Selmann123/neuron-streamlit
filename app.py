@@ -66,3 +66,28 @@ Bu sistem:
 🎯 Müdahale etkisini  
 incelemek için kullanılabilir.
 """)
+import time
+
+st.header("Canlı Gün 1 — Tek Nöron")
+
+I = st.slider("I (giriş akımı)", 0.0, 5.0, 1.5)
+noise = st.slider("noise", 0.0, 5.0, 2.0)
+speed = st.slider("Hız (ms)", 10, 200, 50)
+
+if st.button("Canlı çalıştır"):
+    V = simulate_single(I=I, noise=noise, T=T, dt=dt, seed=seed,
+                        V_rest=default_Vrest, tau=default_tau)
+    t = np.arange(0, T, dt)
+
+    placeholder = st.empty()
+    fig, ax = plt.subplots(figsize=(9,3))
+
+    for i in range(1, len(t)):
+        ax.clear()
+        ax.plot(t[:i], V[:i])
+        ax.axhline(default_Vth, linestyle='--')
+        ax.set_xlabel("Time (ms)")
+        ax.set_ylabel("mV")
+        ax.set_title("Canlı Tek Nöron")
+        placeholder.pyplot(fig)
+        time.sleep(speed / 1000)
