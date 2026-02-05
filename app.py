@@ -1,13 +1,16 @@
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
-def simulate_single(I=1.5, noise=2.0, T=500, dt=1, seed=1, V_rest=-65, tau=20):import ...
-...
-def simulate_single(...):
-    ...
-...
-if st.button("Canlı çalıştır"):
-    ...
+import time
+from scipy.signal import correlate
+def simulate_single(I=1.5, noise=2.0, T=500, dt=1, seed=1, V_rest=-65, tau=20):
+    np.random.seed(seed)
+    steps = int(T / dt)
+    V = np.ones(steps) * V_rest
+    for t in range(1, steps):
+        dV = (-(V[t-1] - V_rest) + I) / tau
+        V[t] = V[t-1] + dV * dt + noise * np.random.randn() * 0.2
+    return V
     np.random.seed(seed)
     steps = int(T / dt)
     V = np.ones(steps) * V_rest
